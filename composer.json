@@ -10,6 +10,7 @@
         "ext-pdo": "*",
         "laravel/framework": "^11.0",
         "laravel/octane": "^2.3",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "stancl/tenancy": "^3.8"
     },
