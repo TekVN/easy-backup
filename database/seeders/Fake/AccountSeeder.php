@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\Fake;
 
-use App\Models\User;
+use App\Account\Services\AccountCreator;
 use Illuminate\Database\Seeder;
 
 class AccountSeeder extends Seeder
@@ -21,7 +21,7 @@ class AccountSeeder extends Seeder
      */
     private function createAdminMasterAccount(): void
     {
-        User::factory()->create([
+        app(AccountCreator::class)->create([
             'name' => 'Administrator',
             'email' => 'admin@easy-backup.io',
             'password' => '12345678',
