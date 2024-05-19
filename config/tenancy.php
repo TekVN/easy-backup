@@ -1,11 +1,12 @@
 <?php
 
 use App\Tenancy\Models\Tenant;
+use App\Tenancy\Utils\UlidGenerator;
 use Stancl\Tenancy\Database\Models\Domain;
 
 return [
     'tenant_model' => Tenant::class,
-    'id_generator' => Stancl\Tenancy\UUIDGenerator::class,
+    'id_generator' => UlidGenerator::class,
 
     'domain_model' => Domain::class,
 

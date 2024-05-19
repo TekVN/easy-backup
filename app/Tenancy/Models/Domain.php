@@ -5,10 +5,12 @@ namespace App\Tenancy\Models;
 use Database\Factories\DomainFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Stancl\Tenancy\Database\Concerns\GeneratesIds;
 use Stancl\Tenancy\Database\Models\Domain as BaseDomain;
 
 class Domain extends BaseDomain
 {
+    use GeneratesIds;
     use HasFactory;
 
     /**
