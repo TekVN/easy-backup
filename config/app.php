@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => $appUrl = env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -134,4 +134,14 @@ return [
 
     'force_https' => env('APP_FORCE_HTTPS', false),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Force https
+    |--------------------------------------------------------------------------
+    |
+    |   Được sử dụng trong các trường hợp application không nhận diện được request là https
+    |
+    */
+
+    'domain' => env('APP_DOMAIN', parse_url($appUrl)['host'] ?? 'easy-backup.test'),
 ];
