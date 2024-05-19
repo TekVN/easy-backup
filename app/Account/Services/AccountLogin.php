@@ -2,8 +2,9 @@
 
 namespace App\Account\Services;
 
+use App\Account\Events\LoginSuccess;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Fluent;
 use Laravel\Sanctum\NewAccessToken;
 
@@ -16,17 +17,15 @@ class AccountLogin
     {
         $data = new Fluent($params);
 
-        $logged = Auth::guard($guard)->attempt([
-            'email' => $data->get('login_id'),
-            'password' => $data->get('password'),
-        ]);
-        if (! $logged) {
+        $user = User::query()->where('email', $data->get('login_id'))->first();
+        if (empty($user)) {
             return false;
         }
-        /**
-         * @var User $user
-         */
-        $user = Auth::guard($guard)->user();
+        if (! Hash::check($data->get('password', ''), $user->password)) {
+            return false;
+        }
+
+        LoginSuccess::dispatch($user);
 
         return $user->createToken($data->get('token_name', 'default'));
     }
