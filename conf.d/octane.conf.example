@@ -1,0 +1,13 @@
+[program:easybackup-octane]
+process_name=%(program_name)s_%(process_num)02d
+command=/usr/bin/php8.3 /var/www/easy-backup/artisan octane:start
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true
+user=easybackup
+numprocs=1
+redirect_stderr=true
+stdout_logfile=/var/www/easy-backup/storage/logs/octane.log
+stdout_logfile_maxbytes=10MB
+stopwaitsecs=3600
