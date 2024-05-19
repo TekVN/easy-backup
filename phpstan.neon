@@ -9,8 +9,8 @@ parameters:
 
     treatPhpDocTypesAsCertain: false
 
-#    ignoreErrors:
-#        - '#PHPDoc tag @var#'
+    ignoreErrors:
+        - '#Unsafe usage of new static\(\)#'
 #
 #    excludePaths:
 #        - ./*/*/FileToBeExcluded.php
