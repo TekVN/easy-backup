@@ -2,10 +2,15 @@
 
 namespace App\Providers;
 
+use App\Models\PersonalAccessToken;
+use App\Models\User;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Sanctum\Sanctum;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +34,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        JsonResource::$wrap = '';
+        Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
+
+        Relation::enforceMorphMap([
+            'user' => User::class,
+        ]);
     }
 }

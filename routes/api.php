@@ -12,6 +12,8 @@ foreach (config('tenancy.central_domains') as $domain) {
             Route::prefix('accounts')->group(function () {
                 // Tạo tài khoản mới
                 Route::post('create', [AccountController::class, 'create']);
+                // Đăng nhập tài khoản
+                Route::post('login', [AccountController::class, 'login']);
             });
         });
     });
