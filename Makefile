@@ -43,7 +43,11 @@ fix:
 # Chạy nhanh test
 .PHONY: test
 test:
-	php artisan test
+	php artisan test --compact
+
+.PHONY: test-parallel
+test-parallel:
+	php artisan test --parallel
 
 .PHONY: migrate
 migrate:
