@@ -6,6 +6,7 @@ use App\Account\FormRequests\AccountCreateRequest;
 use App\Account\FormRequests\AccountLoginRequest;
 use App\Account\FormRequests\AccountLogoutRequest;
 use App\Account\Resources\NewAccessTokenResource;
+use App\Account\Resources\UserResource;
 use App\Account\Services\AccountCreator;
 use App\Account\Services\AccountLogin;
 use App\Account\Services\AccountLogout;
@@ -13,7 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Validation\ValidationException;
 
 class AccountController extends Controller
@@ -21,11 +22,11 @@ class AccountController extends Controller
     /**
      * Tạo tài khoản mới
      */
-    public function create(AccountCreateRequest $request, AccountCreator $accountCreator): JsonResponse
+    public function create(AccountCreateRequest $request, AccountCreator $accountCreator): JsonResource
     {
-        $accountCreator->create($request->validated());
+        $user = $accountCreator->create($request->validated());
 
-        return response()->json(status: Response::HTTP_CREATED);
+        return UserResource::make($user);
     }
 
     /**
