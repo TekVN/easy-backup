@@ -13,7 +13,7 @@ class AccountCreateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:App\Models\User,email'],
+            'email' => ['required', 'string', 'email:strict', 'max:255', 'unique:App\Models\User,email'],
             'password' => ['required', 'string', 'min:3', 'max:255'],
         ];
     }
