@@ -6,8 +6,10 @@ use App\Account\FormRequests\AccountCreateRequest;
 use App\Account\FormRequests\AccountLoginRequest;
 use App\Account\FormRequests\AccountLogoutRequest;
 use App\Account\Resources\NewAccessTokenResource;
+use App\Account\Resources\ProfileResource;
 use App\Account\Resources\UserResource;
 use App\Account\Services\AccountCreator;
+use App\Account\Services\AccountInfo;
 use App\Account\Services\AccountLogin;
 use App\Account\Services\AccountLogout;
 use App\Http\Controllers\Controller;
@@ -64,5 +66,15 @@ class AccountController extends Controller
         }
 
         return response()->json();
+    }
+
+    /**
+     * Lấy thông tin profile của user
+     */
+    public function profile(mixed $userId, AccountInfo $accountInfo): JsonResource
+    {
+        $profile = $accountInfo->profile($userId);
+
+        return ProfileResource::make($profile);
     }
 }

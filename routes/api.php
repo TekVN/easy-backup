@@ -14,8 +14,14 @@ foreach (config('tenancy.central_domains') as $domain) {
                 Route::post('create', [AccountController::class, 'create']);
                 // Đăng nhập tài khoản
                 Route::post('login', [AccountController::class, 'login']);
-                // Đăng xuất tài khoản
-                Route::delete('logout', [AccountController::class, 'logout'])->middleware('auth');
+
+                // Authenticated
+                Route::middleware('auth')->group(function () {
+                    // Đăng xuất tài khoản
+                    Route::delete('logout', [AccountController::class, 'logout'])->middleware('auth');
+                    // Lấy thông tin tài khoản
+                    Route::get('{userId}/profile', [AccountController::class, 'profile'])->middleware('auth');
+                });
             });
         });
     });
